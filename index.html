@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eye Protector</title>
+  <style>
+    body {
+      background-color: #121212!important;
+      color: #ffffff!important;
+    }
+  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+  <script type="text/javascript">
+    function blink() {
+      var audio = document.getElementById("blink");
+
+      audio.play();
+
+      setInterval(() => {
+        audio.play();
+      }, 2000);
+    }
+
+    function eyebreaks() {
+      var audio = document.getElementById("break");
+      var display = document.getElementById("break-label");
+      let minutes = 20;
+      let seconds = 0;
+      display.innerHTML = `${minutes}:0${seconds}`;
+
+      setInterval(() => {
+        if(seconds == 0) {
+          minutes--;
+          seconds = 59;
+        } else {
+          seconds--;
+        }
+        if(seconds < 10) display.innerHTML = `${minutes}:0${seconds}`;
+        else display.innerHTML = `${minutes}:${seconds}`;
+      }, 1000);
+
+      
+      setInterval(() => {
+        audio.play();
+        setTimeout(() => audio.play(), 16250);
+        
+      }, 1000 * 60 * 20);
+    }
+  </script>
+  <h1 class="text-center py-5">Eye Protector</h1>
+  <h2 class="text-center" onclick="blink();">Blink</h2>
+  <h2 class="text-center" id="break-label" onclick="eyebreaks();">20-20-20 Rule</h2>
+  <audio id="blink" style="display: none;">
+    <source src="./blink.mp3">
+  </audio>
+  <audio id="break" style="display: none;">
+    <source src="./202020.mp3">
+  </audio>
+  <script>
+    document.getElementById("blink").volume = 0.5;
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
